@@ -1,0 +1,63 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #1A2533;
+    background-color: #EAEDF1;
+}
+
+#drop-area{
+    border: 2px dashed #1A2533;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+#drop-area:hover {
+    background-color: #d4d7db;
+    transition: all .5s ease;
+}
+
+#upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#drop-area.highlight {
+    background-color: #d4d7db;
+    transition: all .5s ease;
+
+}
+
+button {
+    background-color: #1A2533;
+    border: none;
+    color: #EAEDF1;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color .3s ease;
+}
+
+button:hover {
+    background-color: #344965;
+}
+
+button:active {
+    background-color: #1A2533;
+}
+
+#interpret {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}

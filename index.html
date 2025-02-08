@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Blood Test Report Interpreter</title>
+</head>
+<body>
+
+    <h1>Blood Test Report Interpreter</h1>
+    <div id="drop-area">
+        <p>Drag &amp; drop a PDF or click to select a file</p>
+        <input type="file" id="pdfFile" accept=".pdf">  
+    </div>
+
+    <div id="upload">
+        <button onclick="uploadFile()">Upload</button>
+    </div>
+
+    <div id="interpret">
+        <button onclick="interpretFile()">Interpret</button>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
