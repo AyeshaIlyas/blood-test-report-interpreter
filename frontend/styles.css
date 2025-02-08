@@ -19,13 +19,6 @@ body {
     transition: all .5s ease;
 }
 
-#upload {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
 #drop-area.highlight {
     background-color: #d4d7db;
     transition: all .5s ease;
