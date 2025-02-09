@@ -6,6 +6,7 @@ body {
 
 .card {
     border: none; /* Remove card border */
+    margin-bottom: 2em;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
 }
 
@@ -67,4 +68,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#disclaimer{
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: 2em;
 }
