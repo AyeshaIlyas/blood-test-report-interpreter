@@ -2,6 +2,7 @@ const chooseFileBtn = document.getElementById('pdfFile');
 const dropArea = document.getElementById('drop-area');
 const interpretBtn = document.getElementById('interpret');
 const resultsDiv = document.getElementById('results');
+const fileNameSpan = document.getElementById('fileName'); 
 
 async function interpretFile() {
   const file = chooseFileBtn.files[0];
@@ -54,6 +55,14 @@ function displayError(message) {
   resultsDiv.appendChild(errorDiv);
 }
 
+function updateFileNameDisplay() {
+  const file = chooseFileBtn.files[0];
+  if (file) {
+    fileNameSpan.textContent = file.name;
+  } else {
+    fileNameSpan.textContent = ""; //Clear if no file
+  }
+}
 
 interpretBtn.style.display = 'none';
 
@@ -71,6 +80,7 @@ dropArea.addEventListener('drop', (event) => {
     dropArea.classList.remove('highlight');
 
     chooseFileBtn.files = event.dataTransfer.files;
+    updateFileNameDisplay();
 
     if (chooseFileBtn.files.length > 0) {
       console.log("File dropped:", chooseFileBtn.files[0].name);
@@ -79,6 +89,7 @@ dropArea.addEventListener('drop', (event) => {
 });
 
 chooseFileBtn.addEventListener('change', (event) => {
+  updateFileNameDisplay();
   if (event.target.files.length > 0) {
     console.log("File selected (click):", event.target.files[0].name);
     interpretBtn.style.display = 'flex';
