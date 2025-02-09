@@ -63,7 +63,7 @@ body {
     font-weight: bold;
 }
 
-#interpret {
+#button-container {
     display: flex;
     justify-content: center;
     align-items: center;
