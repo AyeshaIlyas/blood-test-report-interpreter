@@ -1,4 +1,4 @@
-from backend.celery_app import celery  # Import the Celery app instance
+from celery_app import celery  # Import the Celery app instance
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
