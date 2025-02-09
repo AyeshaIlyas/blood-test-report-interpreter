@@ -124,16 +124,6 @@ async function interpretReport() {
     displayError(error.message);
     resetUI();
   }
-
-  if (resultsData.result) {
-    clearInterval(intervalId);
-    displayResults(resultsData.result);
-    resetUI(); // Call resetUI here
-  } else if (resultsData.error) {
-    clearInterval(intervalId);
-    displayError(resultsData.error);
-    resetUI(); // And here as well
-  }
 }
 
 interpretBtn.style.display = "none";
