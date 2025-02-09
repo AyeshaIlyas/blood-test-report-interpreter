@@ -4,8 +4,25 @@ body {
     color: #1A2533; /* Dark gray text */
 }
 
+header {
+    position: sticky;
+    top: 0;
+}
+
+hr {
+    padding: 0px;
+    margin: 3px;
+}
+header img {
+    padding: 5px;
+    margin-left: 5px;
+    width: 70px;
+    height: 70px;
+}
+
 .card {
     border: none; /* Remove card border */
+    margin-bottom: 2em;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
 }
 
@@ -43,6 +60,7 @@ body {
 
 /* Optional: Add some spacing and padding to the results area */
 #results {
+    display: none;
     padding: 20px;
     border: 1px solid #ced4da;
     border-radius: 5px;
@@ -67,4 +85,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#disclaimer{
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: 2em;
 }
