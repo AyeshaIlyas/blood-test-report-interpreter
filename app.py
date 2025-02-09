@@ -11,7 +11,7 @@ app = Flask(__name__,
             static_url_path='/static')
 CORS(app)  # Enable CORS for all routes
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '.'
 ALLOWED_EXTENSIONS = {'pdf'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
