@@ -30,10 +30,10 @@ body {
     border-color: #486387;
 }
 
-.btn-primary.active
-.btn-primary:active { 
-    background-color: #486387; 
-    border-color: #486387;
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #486387 !important;
+    border-color: #486387 !important;
 }
 
 .btn-success {
