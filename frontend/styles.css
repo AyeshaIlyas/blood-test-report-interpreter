@@ -25,6 +25,11 @@ body {
     border-color: #1A2533;
 }
 
+.btn-primary:hover {
+    background-color: #486387; 
+    border-color: #486387;
+}
+
 .btn-success {
     background-color: #1A2533; 
     border-color: #1A2533;
