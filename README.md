@@ -7,7 +7,7 @@ Make sure Python is updated on your device. Download or close this repo. Open te
 Run <code>source .venv/bin/activate</code> to activate a virtual enviroment.<br>
 Then, run <code>pip3 install -r requirements.txt</code> to install dependencies.<br>
 Run <code>flask run</code> to run the app. Then, open the index.html file in your browser.<br>
-Load some blood test reports and interpret your results!
+Load some blood test reports and interpret your results!<br>
 <br>
 Note: This project is not intending to provide any medical advice, nor should this replace the consultation of an actual medical professional.
 (This project should not be used for clinical purposes, as a subsitute for professional medical advice, or in any manner that is overseen by or requires clearance or approval from any applicable regulatory authority.)   
