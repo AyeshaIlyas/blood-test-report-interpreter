@@ -5,6 +5,7 @@ const resultsDiv = document.getElementById('results');
 const fileNameSpan = document.getElementById('fileName'); 
 
 async function interpretFile() {
+  document.getElementById("results").style.display = "block";
   const file = chooseFileBtn.files[0];
   
   if (!file) {
