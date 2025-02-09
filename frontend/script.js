@@ -1,14 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let selectedFile; // Store the selected file
-
     function interpretFile() {
-        if (!selectedFile) {
-            console.log("No file selected.");
-            return; // Don't proceed if no file is selected
+        const fileInput = document.getElementById('pdfFile');
+        const file = fileInput.files[0];
+        if (!file) {
+           alert("No file selected.");
+        return; // Don't proceed if no file is selected
         }
 
         console.log("Interpreting the PDF:", selectedFile.name);
         // ... (Your PDF interpretation logic here) ...
+        const formData = new FormData();
+        formData.append('pdfFile', file); // 'pdfFile' should match your backend's expected name
+
+        fetch('http://127.0.0.1:5000/interpret', { // Replace '/interpret' with your backend endpoint
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(err => {throw new Error(err.message || response.statusText)}); // Extract error message from JSON if available
+          }
+          return response.json(); // Or response.text() if your backend returns plain text
+        })
+        .then(data => {
+          // Process the interpreted data from the backend
+          displayResults(data); // Function to display results
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayError(error.message); // Display error message to the user
+        });
+    }
+
+    function displayResults(data) {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = ''; // Clear previous results
+    
+        if (typeof data === 'object') {
+            for (const key in data) {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+    
+                const label = document.createElement('span');
+                label.classList.add('result-label');
+                label.textContent = `${key}: `;
+                resultItem.appendChild(label);
+    
+                const value = document.createElement('span');
+                value.textContent = data[key];
+                resultItem.appendChild(value);
+    
+                resultsDiv.appendChild(resultItem);
+            }
+        } else {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = data;
+            resultsDiv.appendChild(resultItem);
+        }
+    }
+    
+    
+    function displayError(message) {
+      const resultsDiv = document.getElementById('results');
+      const errorDiv = document.createElement('div');
+      errorDiv.classList.add('error-message');
+      errorDiv.textContent = message;
+      resultsDiv.innerHTML = ''; // Clear previous results
+      resultsDiv.appendChild(errorDiv);
     }
 
     document.getElementById('interpret').style.display = 'none';
