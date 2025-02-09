@@ -1,0 +1,45 @@
+services:
+  - type: worker
+    name: celery-worker
+    region: ohio
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery --app blood_test_project.celery_app.celery worker --loglevel info --concurrency 4"
+    autoDeploy: false
+    envVars:
+      - key: CELERY_BROKER_URL
+        fromService:
+          name: celery-redis
+          type: redis
+          property: connectionString
+      - key: GEMINI_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: "production"
+
+  - type: web
+    name: app
+    region: ohio
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn -w 4 -b 0.0.0.0:5000 app:app"
+    autoDeploy: false
+    envVars:
+      - key: CELERY_BROKER_URL
+        fromService:
+          name: celery-redis
+          type: redis
+          property: connectionString
+      - key: GEMINI_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: "production"
+      - key: UPLOAD_FOLDER
+        value: "uploads"
+
+  - type: redis
+    name: celery-redis
+    region: ohio
+    plan: starter # we choose a plan with persistence to ensure tasks are not lost upon restart
+    maxmemoryPolicy: noeviction # recommended policy for queues
+    ipAllowList: [] # only allow internal connections
