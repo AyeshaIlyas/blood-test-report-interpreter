@@ -2,7 +2,7 @@
 
 Making understanding your blood test report accessible to the common patient. 
 
-<h6>Running this project locally:</h6>
+<h3>Running this project locally:</h3>
 Make sure Python is updated on your device. Download or close this repo. Open terminal/command line and <code>cd</code> into the backend folder.<br>
 Run <code>source .venv/bin/activate</code> to activate a virtual enviroment.<br>
 Then, run <code>pip3 install -r requirements.txt</code> to install dependencies.<br>
