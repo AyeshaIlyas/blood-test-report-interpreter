@@ -7,3 +7,4 @@ pdfplumber
 celery
 redis
 celery
+gunicorn
