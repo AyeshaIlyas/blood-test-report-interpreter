@@ -22,10 +22,6 @@ To run this project locally, follow these steps:
 7. **Access the Application:** Open the ```index.html``` file in your web browser. This is usually http://127.0.0.1:5000/.
 8. **Load and Interpret Reports:** You can now load your blood test reports and use the application to explore and interpret your results.
 
-## TODO
-- condense initial output results from Gemini
-- improve output readability (change model to gpt?)
-
 # Running the Backend Server
 
 NOTE: You need to download redis. If you have brew you can use `brew install redis`
