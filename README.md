@@ -2,9 +2,6 @@
 
 This project aims to make understanding your blood test report more accessible to the average patient.
 
-Note: This project is not intending to provide any medical advice, nor should this replace the consultation of an actual medical professional.
-(This project should not be used for clinical purposes, as a subsitute for professional medical advice, or in any manner that is overseen by or requires clearance or approval from any applicable regulatory authority.)
-
 **Disclaimer:** This project is for informational purposes only and **does not provide medical advice**. It should not be used as a substitute for consulting with a qualified medical professional.  This project should not be used for clinical purposes, as a substitute for professional medical advice, or in any manner that is overseen by or requires clearance or approval from any applicable regulatory authority.  Always consult with your doctor or other healthcare provider for any questions you may have regarding your health or a medical condition.
 
 ## Getting Started
