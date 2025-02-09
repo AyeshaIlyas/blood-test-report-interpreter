@@ -7,7 +7,7 @@ const fileNameSpan = document.getElementById("fileName");
 function displayResults(data) {
   resultsDiv.innerHTML = ""; 
   const resultItem = document.createElement("div");
-  resultItem.textContent = data;
+  resultItem.innerHTML = data;
   resultsDiv.appendChild(resultItem);
 }
 
@@ -15,7 +15,7 @@ function displayError(message) {
   resultsDiv.innerHTML = "";
   const errorDiv = document.createElement("div");
   errorDiv.classList.add("error-message");
-  errorDiv.textContent = message;
+  errorDiv.innerHTML = message;
   resultsDiv.appendChild(errorDiv);
 }
 

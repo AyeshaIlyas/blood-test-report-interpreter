@@ -61,7 +61,7 @@ header img {
 
 /* Optional: Add some spacing and padding to the results area */
 #results {
-    display: none;
+    /* display: none; */
     padding: 20px;
     border: 1px solid #ced4da;
     border-radius: 5px;
