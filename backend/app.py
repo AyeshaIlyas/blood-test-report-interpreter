@@ -7,7 +7,8 @@ import os
 from backend.celery_app import make_celery
 
 # create and configure flask app
-app = Flask(__name__)
+app = Flask(__name__, 
+            static_url_path='/static')
 CORS(app)  # Enable CORS for all routes
 
 UPLOAD_FOLDER = 'uploads'
