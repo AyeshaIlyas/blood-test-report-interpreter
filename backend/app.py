@@ -1,47 +1,55 @@
-from flask import Flask
-import os
-from flask import Flask, request
-from werkzeug.utils import secure_filename
+from backend.tasks import interpret_report
+from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
+import pdfplumber
+import os
+from backend.celery_app import make_celery
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'pdf'}
-
+# create and configure flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'pdf'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# create celery instance
+celery = make_celery(app)  # Initialize Celery with Flask app
+
+def get_text(file_name):
+    with pdfplumber.open(file_name) as pdf:
+        pages = []
+        for page in pdf.pages:
+            pages.append(page.extract_text())
+        return pages
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/interpret', methods=['GET', 'POST'])
+@app.route('/interpret', methods=['POST'])
 def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        print(request.files)
-        if 'file' not in request.files:
-            return "file not found"
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            return "not file provided"
-        if file and allowed_file(file.filename):
-            filename = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
-            file.save(filename)
-            return "saved file"
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        return jsonify({"error": "file not found"})
+    file = request.files['file']
+    # If the user does not select a file, the browser submits an
+    # empty file without a filename.
+    if file.filename == '':
+        return jsonify({"error": "file not provided"})
+    if file and allowed_file(file.filename):
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
+        file.save(filepath)
+        pages = get_text(filepath)
+        task = interpret_report.delay(pages)
+        print(task.id)
+        os.remove(filepath)
+        return jsonify({"task_id": task.id, "message": "Processing started"}), 202
 
-if __name__ == '__main__':
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    app.run(debug=True)
+@app.route('/results/<task_id>')
+def get_results(task_id):
+    task = celery.AsyncResult(task_id)
+    if task.ready():
+        return jsonify(task.result)
+    return jsonify({"status": task.status}) # Or return a processing message
