@@ -5,25 +5,26 @@ body {
 }
 
 header {
-    position: sticky;
-    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 hr {
     padding: 0px;
     margin: 3px;
 }
+
 header img {
     padding: 5px;
-    margin-left: 5px;
-    width: 70px;
-    height: 70px;
+    width: 25vw;
+    max-width: 150px;
 }
 
 .card {
     border: none; /* Remove card border */
     margin-bottom: 2em;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
 }
 
 #drop-area {
