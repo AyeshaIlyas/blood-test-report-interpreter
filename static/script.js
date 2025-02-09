@@ -49,7 +49,7 @@ async function pollResults(taskId) {
 
     try {
       const resultsResponse = await fetch(
-        `http://127.0.0.1:5000/results/${taskId}`
+        `https://app-4dax.onrender.com/results/${taskId}`
       );
 
       if (!resultsResponse.ok) {
@@ -101,7 +101,7 @@ async function interpretReport() {
   const formData = new FormData();
   formData.append("file", file);
 
-  const url = "http://127.0.0.1:5000/interpret";
+  const url = "https://app-4dax.onrender.com/interpret";
 
   try {
     const response = await fetch(url, { method: "POST", body: formData });
