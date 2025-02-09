@@ -4,6 +4,15 @@ body {
     color: #1A2533; /* Dark gray text */
 }
 
+header {
+    position: sticky;
+    top: 0;
+}
+
+hr {
+    padding: 0px;
+    margin: 3px;
+}
 header img {
     padding: 5px;
     margin-left: 5px;
