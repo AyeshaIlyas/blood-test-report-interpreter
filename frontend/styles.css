@@ -1,95 +1,121 @@
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #EAEDF1; /* Light gray background */
-    color: #1A2533; /* Dark gray text */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #eaedf1; /* Light gray background */
+  color: #1a2533; /* Dark gray text */
 }
 
 header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 hr {
-    padding: 0px;
-    margin: 3px;
+  padding: 0px;
+  margin: 3px;
 }
 
 header img {
-    padding: 5px;
-    width: 25vw;
-    max-width: 150px;
+  padding: 5px;
+  width: 25vw;
+  max-width: 150px;
 }
 
 .card {
-    border: none; /* Remove card border */
-    margin-bottom: 2em;
-    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
+  border: none; /* Remove card border */
+  margin-bottom: 2em;
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
 }
 
 #drop-area {
-    border-color: #ced4da; /* Light gray border */
-    background-color: #ffffff; /* White background for drop area */
-    transition: background-color 0.5s ease;
+  border-color: #ced4da; /* Light gray border */
+  background-color: #ffffff; /* White background for drop area */
+  transition: background-color 0.5s ease;
 }
 
 #drop-area:hover {
-    background-color: #f0f0f0; /* Slightly darker background on hover */
-    border-color: #adb5bd;
+  background-color: #f0f0f0; /* Slightly darker background on hover */
+  border-color: #adb5bd;
 }
 
 .btn-primary {
-    background-color: #1A2533; 
-    border-color: #1A2533;
+  background-color: #1a2533;
+  border-color: #1a2533;
 }
 
 .btn-primary:hover {
-    background-color: #486387; 
-    border-color: #486387;
+  background-color: #486387;
+  border-color: #486387;
 }
 
 .btn-primary:active,
 .btn-primary.active {
-    background-color: #486387 !important;
-    border-color: #486387 !important;
+  background-color: #486387 !important;
+  border-color: #486387 !important;
 }
 
 .btn-success {
-    background-color: #1A2533; 
-    border-color: #1A2533;
+  background-color: #1a2533;
+  border-color: #1a2533;
 }
 
 /* Optional: Add some spacing and padding to the results area */
 #results {
-    /* display: none; */
-    padding: 20px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  /* display: none; */
+  padding: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-/* Styling for error messages (if needed) */
 .error-message {
-    color: #dc3545; /* Red error text */
+  color: #dc3545;
 }
 
-/* Example styling for interpreted results (customize as needed) */
 .result-item {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .result-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#disclaimer{
-    font-style: italic;
-    font-size: 0.8em;
-    margin-bottom: 2em;
+#disclaimer {
+  font-style: italic;
+  font-size: 0.8em;
+  margin-bottom: 2em;
+}
+
+/* Loader Styles */
+.loader {
+    display: none; 
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #1A2533; 
+    border-radius: 50%; 
+    width: 35px;
+    height: 35px;
+    animation: spin 1.5s cubic-bezier(0.4, 2.0, 0.5, 1.0) infinite; 
+    margin: 0 auto; 
+    box-sizing: border-box; 
+    box-shadow: inset 0px 0px 8px rgba(7, 7, 7, 0.5);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.btn-primary .button-text {
+    visibility: visible; 
+}
+
+.btn-primary.loading .button-text {
+    visibility: hidden;
 }

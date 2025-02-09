@@ -4,8 +4,11 @@ const interpretBtn = document.getElementById("interpret");
 const resultsDiv = document.getElementById("results");
 const fileNameSpan = document.getElementById("fileName");
 
+const loader = interpretBtn.querySelector(".loader");
+const buttonText = interpretBtn.querySelector(".button-text");
+
 function displayResults(data) {
-  resultsDiv.innerHTML = ""; 
+  resultsDiv.innerHTML = "";
   const resultItem = document.createElement("div");
   resultItem.innerHTML = data;
   resultsDiv.appendChild(resultItem);
@@ -30,7 +33,9 @@ function updateFileNameDisplay() {
 
 function resetUI() {
   interpretBtn.disabled = false;
-  interpretBtn.textContent = "Interpret";
+  interpretBtn.classList.remove("loading"); // Remove loading class
+  loader.style.display = "none"; // Hide loader
+  buttonText.style.display = "inline"; // Show button text
 }
 
 async function pollResults(taskId) {
@@ -43,8 +48,10 @@ async function pollResults(taskId) {
     console.log(`Polling attempt ${attempts + 1} for task: ${taskId}`);
 
     try {
-      const resultsResponse = await fetch(`http://127.0.0.1:5000/results/${taskId}`);
-      
+      const resultsResponse = await fetch(
+        `http://127.0.0.1:5000/results/${taskId}`
+      );
+
       if (!resultsResponse.ok) {
         throw new Error(`Server error: ${resultsResponse.status}`);
       }
@@ -78,8 +85,10 @@ async function pollResults(taskId) {
 
 async function interpretReport() {
   console.log("Interpreting...");
-  interpretBtn.disabled = true; 
-  interpretBtn.textContent = "Processing...";
+  interpretBtn.disabled = true;
+  interpretBtn.classList.add("loading"); // Add loading class
+  loader.style.display = "block"; // Show loader
+  buttonText.style.display = "none"; // Hide button text
 
   const file = chooseFileBtn.files[0];
 
@@ -114,6 +123,16 @@ async function interpretReport() {
     console.error("Overall error:", error);
     displayError(error.message);
     resetUI();
+  }
+
+  if (resultsData.result) {
+    clearInterval(intervalId);
+    displayResults(resultsData.result);
+    resetUI(); // Call resetUI here
+  } else if (resultsData.error) {
+    clearInterval(intervalId);
+    displayError(resultsData.error);
+    resetUI(); // And here as well
   }
 }
 
@@ -151,7 +170,7 @@ chooseFileBtn.addEventListener("change", (event) => {
   }
 });
 
-interpretBtn.addEventListener("click", e => {
+interpretBtn.addEventListener("click", (e) => {
   e.preventDefault();
   interpretReport();
 });
