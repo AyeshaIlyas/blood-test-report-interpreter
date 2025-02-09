@@ -1,10 +1,10 @@
-from backend.tasks import interpret_report
+from tasks import interpret_report
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import pdfplumber
 import os
-from backend.celery_app import make_celery
+from celery_app import make_celery
 
 # create and configure flask app
 app = Flask(__name__, 
