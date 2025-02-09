@@ -1,18 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    function uploadFile() {
-        const fileInput = document.getElementById('pdfFile');
-        const file = fileInput.files[0];
-
-        if (file) {
-            console.log("File selected (click):", file.name); // Added (click)
-            document.getElementById('interpret').style.display = 'flex';
-        } else {
-            console.log("No file selected (click)."); // Added (click)
-        }
-    }
+    let selectedFile; // Store the selected file
 
     function interpretFile() {
-        console.log("Interpreting the PDF...");
+        if (!selectedFile) {
+            console.log("No file selected.");
+            return; // Don't proceed if no file is selected
+        }
+
+        console.log("Interpreting the PDF:", selectedFile.name);
+        // ... (Your PDF interpretation logic here) ...
     }
 
     document.getElementById('interpret').style.display = 'none';
@@ -32,15 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         dropArea.classList.remove('highlight');
 
-        const file = event.dataTransfer.files[0];
+        selectedFile = event.dataTransfer.files[0]; // Store the dropped file
         const fileInput = document.getElementById('pdfFile');
         fileInput.files = event.dataTransfer.files;
 
-        console.log("File dropped:", file.name);
+        console.log("File dropped:", selectedFile.name);
         document.getElementById('interpret').style.display = 'flex';
     });
 
-    document.getElementById('pdfFile').addEventListener('change', uploadFile);
+    document.getElementById('pdfFile').addEventListener('change', (event) => {
+        selectedFile = event.target.files[0]; // Store the selected file
+        if (selectedFile) {
+            console.log("File selected (click):", selectedFile.name);
+            document.getElementById('interpret').style.display = 'flex';
+        } else {
+            console.log("No file selected (click).");
+            document.getElementById('interpret').style.display = 'none'; // Hide if no file is selected
+        }
+    });
 
     document.getElementById('interpret').addEventListener('click', interpretFile);
 });
