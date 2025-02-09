@@ -4,6 +4,13 @@ body {
     color: #1A2533; /* Dark gray text */
 }
 
+header img {
+    padding: 5px;
+    margin-left: 5px;
+    width: 70px;
+    height: 70px;
+}
+
 .card {
     border: none; /* Remove card border */
     margin-bottom: 2em;
