@@ -52,9 +52,10 @@ CELERY_BROKER_URL=<broker-url>
 ```flask run```
 
 10. **Access the application:** Navigate to `http://127.0.0.1:5000/` in your web browser.
-<!-- ![landing page](preview) -->
 
-11. **Load and interpret reports:** You can now load your blood test reports and use the application to explore and interpret your results.
+![landing page](app-preview/preview.png)
+
+12. **Load and interpret reports:** You can now load your blood test reports and use the application to explore and interpret your results.
 
 ## Stopping Everything
 - Shut down flask server with `Ctrl + C`
