@@ -17,6 +17,9 @@ We also hoped to increase patients' confidence in approaching their healthcare p
 - Deployed on Render
 - Domain [bloodreportinterpreter.co](bloodreportinterpreter.co) from GoDaddy
 
+## Demo
+![](https://github.com/AyeshaIlyas/blood-test-report-interpreter/blob/main/app-preview/demo.gif)
+
 ## Getting Started (for devs)
 To run this project locally, follow these steps:
 1. **Prerequisites:** Ensure you have Python installed on your device.  It's recommended to use the latest stable version.
