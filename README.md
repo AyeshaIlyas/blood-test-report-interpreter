@@ -15,7 +15,7 @@ We also hoped to increase patients' confidence in approaching their healthcare p
 - Celery + Redis
 - Gemini
 - Deployed on Render
-- Domain [bloodreportinterpreter.co](bloodreportinterpreter.co) from GoDaddy
+- Domain [bloodreportinterpreter.co](https://bloodreportinterpreter.co) from GoDaddy
 
 ## Demo
 ![](https://github.com/AyeshaIlyas/blood-test-report-interpreter/blob/main/app-preview/demo.gif)
