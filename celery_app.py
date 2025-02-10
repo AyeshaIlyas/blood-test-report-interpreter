@@ -2,12 +2,11 @@ from celery import Celery
 import os
 
 # Create the Celery app instance
-celery = Celery('blood_test_tasks',  # Name of Celery app
+celery = Celery("blood_test_tasks",  # Name of Celery app
                 broker=os.getenv("CELERY_BROKER_URL"), # URL of your message broker (Redis)
                 backend=os.getenv("CELERY_BROKER_URL"),
                 include=["tasks"])  # List of modules where your tasks are defined
 
-# Important for Flask integration
 def make_celery(app):
     celery = Celery(__name__,
                     broker=os.getenv("CELERY_BROKER_URL"), # URL of your message broker (Redis)

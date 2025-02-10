@@ -42,14 +42,10 @@ async function pollResults(taskId) {
   let attempts = 0;
   const maxAttempts = 24; // 2-minute timeout
 
-  console.log(`Polling started for Task ID: ${taskId}`);
-
   const intervalId = setInterval(async () => {
-    console.log(`Polling attempt ${attempts + 1} for task: ${taskId}`);
-
     try {
       const resultsResponse = await fetch(
-        `https://app-4dax.onrender.com/results/${taskId}`
+        `/results/${taskId}`
       );
 
       if (!resultsResponse.ok) {
@@ -57,15 +53,13 @@ async function pollResults(taskId) {
       }
 
       const resultsData = await resultsResponse.json();
-      console.log("Received from server:", resultsData);
-
       if (resultsData.result) {
         clearInterval(intervalId);
         displayResults(resultsData.result);
         resetUI();
       } else if (resultsData.error) {
         clearInterval(intervalId);
-        displayError(resultsData.error);
+        displayError("Hmm...we could not process your report");
         resetUI();
       }
 
@@ -77,14 +71,12 @@ async function pollResults(taskId) {
     } catch (error) {
       clearInterval(intervalId);
       displayError("Error fetching results: " + error.message);
-      console.error("Error details:", error);
       resetUI();
     }
   }, 5000);
 }
 
 async function interpretReport() {
-  console.log("Interpreting...");
   interpretBtn.disabled = true;
   interpretBtn.classList.add("loading"); // Add loading class
   loader.style.display = "block"; // Show loader
@@ -101,7 +93,7 @@ async function interpretReport() {
   const formData = new FormData();
   formData.append("file", file);
 
-  const url = "https://app-4dax.onrender.com/interpret";
+  const url = "/interpret";
 
   try {
     const response = await fetch(url, { method: "POST", body: formData });
@@ -111,17 +103,14 @@ async function interpretReport() {
     }
 
     const taskInfo = await response.json();
-    console.log("Task Info Received:", taskInfo);
 
     if (taskInfo.task_id) {
-      console.log("Starting polling for task:", taskInfo.task_id);
       pollResults(taskInfo.task_id);
     } else {
       throw new Error("No task_id received");
     }
   } catch (error) {
-    console.error("Overall error:", error);
-    displayError(error.message);
+    displayError("Hmm...we could not process your report");
     resetUI();
   }
 }
@@ -145,7 +134,6 @@ dropArea.addEventListener("drop", (event) => {
   updateFileNameDisplay();
 
   if (chooseFileBtn.files.length > 0) {
-    console.log("File dropped:", chooseFileBtn.files[0].name);
     interpretBtn.style.display = "flex";
   }
 });
@@ -153,7 +141,6 @@ dropArea.addEventListener("drop", (event) => {
 chooseFileBtn.addEventListener("change", (event) => {
   updateFileNameDisplay();
   if (event.target.files.length > 0) {
-    console.log("File selected (click):", event.target.files[0].name);
     interpretBtn.style.display = "flex";
   } else {
     interpretBtn.style.display = "none";
