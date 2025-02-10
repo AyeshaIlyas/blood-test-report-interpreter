@@ -1,5 +1,5 @@
 from tasks import interpret_report
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import pdfplumber
@@ -7,8 +7,7 @@ import os
 from celery_app import make_celery
 
 # create and configure flask app
-app = Flask(__name__, 
-            static_url_path='/static')
+app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 UPLOAD_FOLDER = '.'
@@ -28,6 +27,10 @@ def get_text(file_name):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route("/")
+def get_index():
+    return render_template("index.html")
 
 @app.route('/interpret', methods=['POST'])
 def upload_file():
@@ -54,3 +57,7 @@ def get_results(task_id):
     if task.ready():
         return jsonify(task.result)
     return jsonify({"status": task.status}) # Or return a processing message
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
