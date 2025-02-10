@@ -1,5 +1,8 @@
 from celery import Celery
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Create the Celery app instance
 celery = Celery("blood_test_tasks",  # Name of Celery app

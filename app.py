@@ -5,9 +5,6 @@ from werkzeug.utils import secure_filename
 import pdfplumber
 import os
 from celery_app import make_celery
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # create and configure flask app
 app = Flask(__name__)

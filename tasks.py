@@ -1,6 +1,9 @@
 from celery_app import celery  # Import the Celery app instance
 import google.generativeai as genai
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # get gemini model
 gemini_key = os.getenv("GEMINI_KEY")
