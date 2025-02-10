@@ -46,7 +46,7 @@ CELERY_BROKER_URL=<broker-url>
 
 7. Start the redis server: `redis-server`
 
-8. Start the celery worker **__from the parent directory__**: `celery -A celery_app worker --loglevel=info --pool=solo`
+8. Start the celery worker: `celery -A celery_app worker --loglevel=info --pool=solo`
 
 9. **Run the flask app:**
 ```flask run```
